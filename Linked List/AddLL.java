@@ -173,21 +173,56 @@ public class AddLL {
         return;
     }
 
+    //palindrome 
+    public Node findMid(Node head){
+        Node slow = head;
+        Node fast = head;
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;//is my mid
+    }
+
+    public boolean isPalindrome(){
+        if(head == null || head.next == null){
+            return true;
+        }
+
+        Node mid = findMid(head);
+
+        Node prev = null;
+        Node curr = mid;
+        Node next;
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        Node right = prev;
+        Node left = head;
+
+        while(right!=null){
+            if(left.data != right.data){
+                return false;
+            }
+            right = right.next;
+            left = left.next;
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
         AddLL ll = new AddLL();
-        ll.addFirst(2);
-        ll.addFirst(1);
-        ll.addLast(3);
-        ll.addLast(4);
-        ll.addMid(2,33);
-        ll.removeFirst();
-        ll.removeLast();
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(2);
+        ll.addLast(2);
         ll.print();
 
-        System.out.println(ll.recSearch(33));
-        System.out.println(ll.itrSearch(44));
-        ll.reverse();
-        ll.deletefromNthend(2);
-        ll.print();
+        System.out.println(ll.isPalindrome());
     }
 }
