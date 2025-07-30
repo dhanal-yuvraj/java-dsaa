@@ -317,15 +317,55 @@ public class AddLL {
 
     }
 
+    //Zig Zag Linked list 
+    public void zigZag(){
+        //find the mid
+        Node slow = head;
+        Node fast = head.next;
+        while(fast!=null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        Node mid = slow;
+        // reverse the second half
+
+        Node curr = mid.next;
+        mid.next = null;
+        Node prev = null;
+        Node next;
+        while(curr != null){
+            next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        Node leftHead = head;
+        Node rightHead = prev;
+        Node lh, rh;
+        while(leftHead != null && rightHead != null){
+            lh = leftHead.next;
+            leftHead.next = rightHead;
+            rh = rightHead.next;
+            rightHead.next = lh;
+
+            leftHead = lh;
+            rightHead = rh;
+        }
+
+    }
+
     public static void main(String[] args) {
         AddLL ll = new AddLL();
-        ll.addFirst(1);
-        ll.addFirst(2);
-        ll.addFirst(3);
-        ll.addFirst(4);
-        ll.addFirst(5);
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.addLast(5);
+        ll.addLast(6);
         ll.print();
-        ll.head = ll.mergeSort(ll.head);
+        ll.zigZag();
         ll.print();
     }
 }
