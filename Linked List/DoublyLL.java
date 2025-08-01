@@ -56,12 +56,56 @@ public class DoublyLL {
         System.out.println("null");
     }
 
+    //remove the double linked list at first
+    public int removeFirst(){
+        if(head == null){
+            System.out.println("The linked list is empty");
+            return Integer.MIN_VALUE;
+        }
+        if(size == 1){
+            int val = head.data;
+            head = tail = null;
+            size--;
+            return val;
+        }
+
+        int val = head.data;
+        head = head.next;
+        head.prev = null;
+        size--;
+        return val;
+    }
+
+    //remove at the last
+
+    public int removeLast(){
+        if(head == null){
+            System.out.println("The linked list is empty");
+            return Integer.MIN_VALUE;
+        }else if(size==1){
+            int val = head.data;
+            head = tail = null;
+            size--;
+            return val;
+        }
+
+        int val = tail.data;
+        tail = tail.prev;
+        tail.next = null;
+        size--;
+        return val;
+
+
+    }
+
 
     public static void main(String[] args) {
         DoublyLL dll = new DoublyLL();
         dll.addFirst(1);
         dll.addLast(2);
         dll.addLast(3);
+        dll.removeFirst();
+        dll.removeLast();
         dll.print();
     }
 }
