@@ -15,6 +15,8 @@ public class ValidParenthesis {
                 ||(s.peek()=='(' && ch ==')')
                 ){
                     s.pop();
+                }else{
+                    return false;
                 }
             }
         }
