@@ -4,7 +4,7 @@ public class JobSequencing {
         int deadline;
         int profit;
         int id;
-        public Job(int d, int p, int i){
+        public Job(int i, int d, int p){
             id = i;
             deadline = d;
             profit = p;
@@ -22,7 +22,22 @@ public class JobSequencing {
         Collections.sort(jobs, (obj1,obj2) -> obj2.profit-obj1.profit);//sorted in descending order
 
         ArrayList<Integer> seq = new ArrayList<>();
-        
+
+        int time = 0;
+        for(int i=0;i<jobs.size();i++){
+            Job curr = jobs.get(i);
+            if(curr.deadline>time){
+                seq.add(curr.id);
+                time++;
+            }
+        }
+
+        System.out.println("The maximum time is "+time);
+
+        for(int i=0;i<seq.size();i++){
+            System.out.print(seq.get(i)+" ");
+        }
+        System.out.println();
 
     }
 }
